@@ -82,11 +82,13 @@ class LunchController extends AbstractController{
                 }
             }
 
-            $items["recipes"] = $recipeReturn;            
+                        
             if(count($recipeReturn))
                 usort($recipeReturn,array($this,'sorting'));                                            
             else
                 $items["message"] = "No data";
+
+            $items["recipes"] = $recipeReturn;
             
         }
         
