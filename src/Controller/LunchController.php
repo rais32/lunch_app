@@ -51,6 +51,7 @@ class LunchController extends AbstractController{
         $counterArr = 0;
 
         if($strCurrTime){
+            $recipeReturn = array(); 
 
             foreach($contentRecipes['recipes'] as $recipe){
             
@@ -74,16 +75,15 @@ class LunchController extends AbstractController{
                 }
                 
                 if(count($recipeIngredients) == 0){
-                    array_push($items,$recipe);
-                    $items[$counterArr]['order']         = strtotime($bestBefore);
-                    $items[$counterArr]['best-before']   = $bestBefore;                
+                    array_push($recipeReturn,$recipe);
+                    $recipeReturn[$counterArr]['order']         = strtotime($bestBefore);
+                    $recipeReturn[$counterArr]['best-before']   = $bestBefore;                
                     $counterArr++;
                 }
             }
-
-            if(count($items)){
-                usort($items,array($this,'sorting'));
-                $items["recipes"] = $items;            
+            $items["recipes"] = $recipeReturn;
+            if(count($recipeReturn)){
+                usort($items,array($this,'sorting'));                            
             }                
             else{
                 $items["message"] = "No data";
