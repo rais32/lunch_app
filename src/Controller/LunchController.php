@@ -4,7 +4,6 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Finder\Finder;
@@ -82,10 +81,14 @@ class LunchController extends AbstractController{
                 }
             }
 
-            if(count($items))
-                usort($items,array($this,'sorting'));            
-            else
+            if(count($items)){
+                usort($items,array($this,'sorting'));
+                $items["recipes"] = $items;            
+            }                
+            else{
                 $items["message"] = "No data";
+            }
+                
             
         }
         
