@@ -88,8 +88,6 @@ class LunchController extends AbstractController{
             else
                 $items["message"] = "No data";
             
-                
-            
         }
         
         $response = new JsonResponse($items,$statusCode);
